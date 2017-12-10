@@ -18,8 +18,8 @@ php artisan serve
 ```
 http://127.0.0.1:8000 にアクセスして以下の手順でAPIキーを登録します。
 - ログイン画面でユーザー情報を登録→ログイン
-- http://developer.chatwork.com/ja/index.htmlに従ってAPIキーを取得する
-- http://127.0.0.1:8000/homeの「ChatworkAPIトークン設定」に取得したAPIキーを設定
+- http://developer.chatwork.com/ja/index.html に従ってAPIキーを取得する
+- http://127.0.0.1:8000/home の「ChatworkAPIトークン設定」に取得したAPIキーを設定
 
 「メンバーを複数チャットルームに一括追加する」リンクからメンバー追加ページに遷移して、
 対象アカウントIDと追加対象チャットルームを選択してメンバー追加できます。
