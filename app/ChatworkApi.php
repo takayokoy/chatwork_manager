@@ -18,7 +18,7 @@ class ChatworkApi
     }
 
 
-    public static function addMenber(array $rooms, $token, $account_id, $role)
+    public static function addMember(array $rooms, $token, $account_id, $role)
     {
         foreach ($rooms as $room_id) {
             $members = array(
@@ -45,11 +45,46 @@ class ChatworkApi
             }
 
             if ($joined !== false) {
-                $failure[$room_id] = $joined;
                 continue;
             }
 
             $members[$role][] = $account_id;
+
+            $body = array_filter(array(
+                'members_admin_ids' => implode(',', $members['admin']),
+                'members_member_ids' => implode(',', $members['member']),
+                'members_readonly_ids' => implode(',', $members['readonly']),
+            ));
+
+            $result = self::putData($token, sprintf(self::BASE_URL . 'rooms/%d/members', $room_id), $body);
+        }
+    }
+
+    public static function deleteMember(array $rooms, $token, $account_id)
+    {
+        foreach ($rooms as $room_id) {
+            $members = array(
+                'admin' => array(),
+                'member' => array(),
+                'readonly' => array(),
+            );
+
+            $results = self::getData($token, sprintf(self::BASE_URL . 'rooms/%d/members', $room_id));
+            foreach ($results as $member) {
+                $mrole = $member['role'];
+                $members[$mrole][] = $member['account_id'];
+            }
+
+
+            if (in_array($account_id, $members['admin']) !== false) {
+                unset($members['admin'][array_search($account_id, $members['admin'])]);
+            } else if (in_array($account_id, $members['member']) !== false) {
+                unset($members['member'][array_search($account_id, $members['member'])]);
+            } else if (in_array($account_id, $members['readonly']) !== false) {
+                unset($members['readonly'][array_search($account_id, $members['readonly'])]);
+            } else {
+                continue;
+            }
 
             $body = array_filter(array(
                 'members_admin_ids' => implode(',', $members['admin']),

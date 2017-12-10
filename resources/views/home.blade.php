@@ -31,6 +31,7 @@
                 <div class="panel-body">
                     <ul>
                         <li><a href="{{ route('chatroom.showadd')}}">メンバーを複数チャットルームに一括追加する</a></li>
+                        <li><a href="{{ route('chatroom.showdelete')}}">メンバーを複数チャットルームから一括削除する</a></li>
                     </ul>
                 </div>
             </div>

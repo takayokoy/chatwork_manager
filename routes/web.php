@@ -18,3 +18,4 @@ Route::post('/token', 'TokenController@post')->name('token');
 Route::get('/chatroom/add', 'ChatRoomController@showadd')->name('chatroom.showadd');
 Route::get('/chatroom/delete', 'ChatRoomController@showdelete')->name('chatroom.showdelete');
 Route::post('/chatroom/add', 'ChatRoomController@add')->name('chatroom.add');
+Route::post('/chatroom/delete', 'ChatRoomController@delete')->name('chatroom.delete');
