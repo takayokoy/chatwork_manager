@@ -20,8 +20,6 @@ class ChatRoomController extends Controller
 
     public function add(Request $request)
     {
-        \Log::debug($request);
-
         $token = $this->getToken($request);
         $rooms = $request->rooms;
         $account_id = $request->account_id;
